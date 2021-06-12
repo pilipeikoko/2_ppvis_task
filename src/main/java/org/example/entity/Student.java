@@ -6,4 +6,15 @@ public class Student {
     private boolean isStudying;
 
 
+    public boolean isStudying() {
+        return isStudying;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
 }
