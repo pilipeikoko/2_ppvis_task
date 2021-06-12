@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class DeanImpl implements Dean {
     @Override
-    public boolean changeStatus(List<Group> groups, Student student, boolean newStatus) {
+    public boolean changeStatus(List<Group> groups, Student student, boolean newStatus,Group newGroup) {
         groups = Collections.synchronizedList(groups);
         synchronized (groups) {
             if (student.isStudying() &&) {

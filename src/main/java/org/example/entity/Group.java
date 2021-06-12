@@ -23,6 +23,10 @@ public class Group {
         return students;
     }
 
+    public int getCourseNumber() {
+        return courseNumber;
+    }
+
     public void addStudent(Student student) {
         if(!CustomValidator.isStudentAlreadyInGroup(this,student.getFullName())){
             students.add(student);
@@ -31,4 +35,5 @@ public class Group {
             throw new CustomException("Student with such name is already in group!");
         }
     }
+
 }
