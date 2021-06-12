@@ -10,17 +10,17 @@ import java.util.List;
 
 public class SecretaryImpl implements Secretary {
     @Override
-    public Group createGroup(String name) {
+    public synchronized Group createGroup(String name) {
         return new Group(name);
     }
 
     @Override
-    public boolean removeGroup(List<Group> groups, Group groupeToRemove) {
+    public synchronized boolean removeGroup(List<Group> groups, Group groupeToRemove) {
         return groups.remove(groupeToRemove);
     }
 
     @Override
-    public List<Student> getStudentsFromGroup(List<Group> groups, Group group) {
+    public synchronized List<Student> getStudentsFromGroup(List<Group> groups, Group group) {
         List<Group> groupList = List.copyOf(groups);
 
         for (Group currentGroup : groupList) {
@@ -32,7 +32,7 @@ public class SecretaryImpl implements Secretary {
     }
 
     @Override
-    public List<Student> getStudentsFromCourse(List<Group> groups, int course) {
+    public synchronized List<Student> getStudentsFromCourse(List<Group> groups, int course) {
         List<Group> groupList = List.copyOf(groups);
         List<Student> result = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class SecretaryImpl implements Secretary {
     }
 
     @Override
-    public void addStudentToGroup(Student student, Group newGroup) {
+    public synchronized void addStudentToGroup(Student student, Group newGroup) {
         newGroup.addStudent(student);
     }
 }

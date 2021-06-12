@@ -11,18 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 public class DeanImpl implements Dean {
+
+
     @Override
-    public boolean changeStatus(List<Group> groups, Student student, boolean newStatus,Group newGroup) {
-        groups = Collections.synchronizedList(groups);
-        synchronized (groups) {
-            if (student.isStudying() &&) {
-                removeStudentFromGroup(groups, student);
-            }
-        }
+    public synchronized void enrollStudent(Group group, Student student) {
+        group.addStudent(student);
     }
 
     @Override
-    public Map<Student, Group> getStudentsFromCity(List<Group> groups, String city) {
+    public synchronized void deducateStudent(Group group, Student student) {
+        group.removeStudent(student);
+    }
+
+    @Override
+    public synchronized Map<Student, Group> getStudentsFromCity(List<Group> groups, String city) {
         List<Group> groupList = List.copyOf(groups);
         Map<Student, Group> result = new HashMap<>();
 
@@ -40,7 +42,7 @@ public class DeanImpl implements Dean {
     }
 
     @Override
-    public boolean moveStudentToOtherGroup(List<Group> groups, Student student, Group newGroup) {
+    public synchronized boolean moveStudentToOtherGroup(List<Group> groups, Student student, Group newGroup) {
         if(student.isStudying()){
             if(removeStudentFromGroup(groups,student)){
                 addStudentToNewGroup(groups,student,newGroup);

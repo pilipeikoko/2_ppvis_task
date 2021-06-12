@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class TeacherImpl implements Teacher {
     @Override
-    public List<Student> getStudentsFromGroup(List<Group> groups, Group group) {
+    public synchronized List<Student> getStudentsFromGroup(List<Group> groups, Group group) {
         List<Group> groupList = List.copyOf(groups);
 
         for (Group currentGroup : groupList) {
@@ -23,7 +23,7 @@ public class TeacherImpl implements Teacher {
     }
 
     @Override
-    public Map<Student, Group> getStudentsByFullName(List<Group> groups, String fullName) {
+    public synchronized Map<Student, Group> getStudentsByFullName(List<Group> groups, String fullName) {
         Map<Student, Group> result = new HashMap<>();
         List<Group> groupList = List.copyOf(groups);
 

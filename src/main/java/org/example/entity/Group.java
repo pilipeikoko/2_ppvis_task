@@ -36,4 +36,9 @@ public class Group {
         }
     }
 
+    public void removeStudent(Student student) {
+        if(!students.remove(student)){
+            throw new CustomException("No such student");
+        }
+    }
 }
