@@ -1,11 +1,13 @@
-package org.example.entity.validator;
+package org.example.validator;
 
 import org.example.entity.Group;
+import org.example.entity.impl.GroupImpl;
 import org.example.entity.Student;
 
 import java.util.List;
 
 public class CustomValidator {
+
     private CustomValidator(){
 
     }

@@ -1,11 +1,13 @@
 package org.example.entity;
 
+import org.example.entity.impl.GroupImpl;
+
 import java.util.List;
 import java.util.Map;
 
 public interface Dean {
-    void enrollStudent(Group group,Student student);
-    void deducateStudent(Group group,Student student);
-    Map<Student,Group> getStudentsFromCity(List<Group> groups, String city);
-    boolean moveStudentToOtherGroup(List<Group> groups,Student student,Group newGroup);
+    void enrollStudent(Group groupImpl, Student student);
+    void deducateStudent(Student student);
+    Map<Student, Group> getStudentsFromCity(List<Group> groups, String city);
+    boolean moveStudentToOtherGroup(Student student, Group newGroup);
 }

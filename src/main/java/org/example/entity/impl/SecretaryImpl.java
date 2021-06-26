@@ -4,41 +4,42 @@ import org.example.entity.Group;
 import org.example.entity.Secretary;
 import org.example.entity.Student;
 import org.example.exception.CustomException;
+import org.example.repository.GroupRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SecretaryImpl implements Secretary {
     @Override
-    public synchronized Group createGroup(String name) {
-        return new Group(name);
+    public synchronized GroupImpl createGroup(String name) {
+        return new GroupImpl(name);
     }
 
     @Override
-    public synchronized boolean removeGroup(List<Group> groups, Group groupeToRemove) {
-        return groups.remove(groupeToRemove);
+    public synchronized boolean removeGroup(Group groupToRemove) {
+        return GroupRepository.getInstance().removeGroup(groupToRemove);
     }
 
     @Override
-    public synchronized List<Student> getStudentsFromGroup(List<Group> groups, Group group) {
-        List<Group> groupList = List.copyOf(groups);
+    public synchronized List<Student> getStudentsFromGroup(Group groupImpl) {
+        List<Group> groupList = GroupRepository.getInstance().getGroups();
 
-        for (Group currentGroup : groupList) {
-            if (currentGroup.equals(group)) {
-                return currentGroup.getStudents();
+        for (Group group : groupList) {
+            if (group.equals(groupImpl)) {
+                return group.getStudents();
             }
         }
         throw new CustomException("Group doesn't exists");
     }
 
     @Override
-    public synchronized List<Student> getStudentsFromCourse(List<Group> groups, int course) {
-        List<Group> groupList = List.copyOf(groups);
+    public synchronized List<Student> getStudentsFromCourse(int course) {
+        List<Group> groupList = GroupRepository.getInstance().getGroups();
         List<Student> result = new ArrayList<>();
 
-        for (Group currentGroup : groupList) {
-            if (currentGroup.getCourseNumber() == course) {
-                result.addAll(currentGroup.getStudents());
+        for (Group group : groupList) {
+            if (group.getCourseNumber() == course) {
+                result.addAll(group.getStudents());
             }
         }
         return result;

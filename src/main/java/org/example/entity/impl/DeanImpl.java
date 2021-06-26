@@ -4,8 +4,8 @@ import org.example.entity.Dean;
 import org.example.entity.Group;
 import org.example.entity.Student;
 import org.example.exception.CustomException;
+import org.example.repository.GroupRepository;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,17 +19,21 @@ public class DeanImpl implements Dean {
     }
 
     @Override
-    public synchronized void deducateStudent(Group group, Student student) {
-        group.removeStudent(student);
+    public synchronized void deducateStudent(Student student) {
+        List<Group> groups = GroupRepository.getInstance().getGroups();
+
+        for (Group group : groups)
+            //todo?
+            group.removeStudent(student);
     }
 
     @Override
     public synchronized Map<Student, Group> getStudentsFromCity(List<Group> groups, String city) {
-        List<Group> groupList = List.copyOf(groups);
+        List<Group> groupList = GroupRepository.getInstance().getGroups();
         Map<Student, Group> result = new HashMap<>();
 
         for (Group group : groupList) {
-            List<Student> students = List.copyOf(group.getStudents());
+            List<Student> students = group.getStudents();
 
             for (Student student : students) {
                 if (student.getCity().equals(city)) {
@@ -42,12 +46,13 @@ public class DeanImpl implements Dean {
     }
 
     @Override
-    public synchronized boolean moveStudentToOtherGroup(List<Group> groups, Student student, Group newGroup) {
-        if(student.isStudying()){
-            if(removeStudentFromGroup(groups,student)){
-                addStudentToNewGroup(groups,student,newGroup);
-            }
-            else{
+    public synchronized boolean moveStudentToOtherGroup(Student student, Group newGroup) {
+        List<Group> groups = GroupRepository.getInstance().getGroups();
+
+        if (student.isStudying()) {
+            if (removeStudentFromGroup(groups, student)) {
+                addStudentToNewGroup(groups, student, newGroup);
+            } else {
                 throw new CustomException("Student not found!");
             }
         }
@@ -55,8 +60,8 @@ public class DeanImpl implements Dean {
     }
 
     private void addStudentToNewGroup(List<Group> groups, Student student, Group newGroup) {
-        for(Group group: groups){
-            if(group.equals(newGroup)){
+        for (Group group : groups) {
+            if (group.equals(newGroup)) {
                 group.addStudent(student);
                 return;
             }
@@ -64,12 +69,12 @@ public class DeanImpl implements Dean {
         throw new CustomException("No such group!");
     }
 
-    private boolean removeStudentFromGroup(List<Group> groups, Student student) {
-        for(Group group:groups){
+    private boolean removeStudentFromGroup(List<Group> groupImpls, Student student) {
+        for (Group group : groupImpls) {
             List<Student> students = group.getStudents();
 
-            for(Student currentStudent: students){
-                if(currentStudent.equals(student)){
+            for (Student currentStudent : students) {
+                if (currentStudent.equals(student)) {
                     students.remove(currentStudent);
                     return true;
                 }

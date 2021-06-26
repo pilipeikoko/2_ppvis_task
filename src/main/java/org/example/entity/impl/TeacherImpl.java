@@ -4,6 +4,7 @@ import org.example.entity.Group;
 import org.example.entity.Student;
 import org.example.entity.Teacher;
 import org.example.exception.CustomException;
+import org.example.repository.GroupRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +12,9 @@ import java.util.Map;
 
 public class TeacherImpl implements Teacher {
     @Override
-    public synchronized List<Student> getStudentsFromGroup(List<Group> groups, Group group) {
-        List<Group> groupList = List.copyOf(groups);
+    public synchronized List<Student> getStudentsFromGroup(Group group) {
+
+        List<Group> groupList = GroupRepository.getInstance().getGroups();
 
         for (Group currentGroup : groupList) {
             if (currentGroup.equals(group)) {
@@ -23,11 +25,11 @@ public class TeacherImpl implements Teacher {
     }
 
     @Override
-    public synchronized Map<Student, Group> getStudentsByFullName(List<Group> groups, String fullName) {
+    public synchronized Map<Student, Group> getStudentsByFullName(String fullName) {
         Map<Student, Group> result = new HashMap<>();
-        List<Group> groupList = List.copyOf(groups);
+        List<Group> groupImplList =GroupRepository.getInstance().getGroups();
 
-        for (Group group : groupList) {
+        for (Group group : groupImplList) {
             List<Student> students = group.getStudents();
             for (Student student : students) {
                 if (student.getFullName().equals(fullName)) {
