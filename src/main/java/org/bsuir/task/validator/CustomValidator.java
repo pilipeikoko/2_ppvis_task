@@ -1,8 +1,7 @@
-package org.example.validator;
+package org.bsuir.task.validator;
 
-import org.example.entity.Group;
-import org.example.entity.impl.GroupImpl;
-import org.example.entity.Student;
+import org.bsuir.task.entity.Group;
+import org.bsuir.task.entity.Student;
 
 import java.util.List;
 

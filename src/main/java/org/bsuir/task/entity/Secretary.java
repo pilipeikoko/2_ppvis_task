@@ -1,6 +1,4 @@
-package org.example.entity;
-
-import org.example.entity.impl.GroupImpl;
+package org.bsuir.task.entity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.example.entity;
+package org.bsuir.task.entity;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package org.example.entity.impl;
+package org.bsuir.task.entity.impl;
 
-import org.example.entity.Group;
-import org.example.entity.Student;
-import org.example.entity.Teacher;
-import org.example.exception.CustomException;
-import org.example.repository.GroupRepository;
+import org.bsuir.task.entity.Group;
+import org.bsuir.task.entity.Student;
+import org.bsuir.task.entity.Teacher;
+import org.bsuir.task.exception.CustomException;
+import org.bsuir.task.repository.GroupRepository;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,9 +1,9 @@
-package org.example.entity.impl;
+package org.bsuir.task.entity.impl;
 
-import org.example.entity.Group;
-import org.example.entity.Student;
-import org.example.validator.CustomValidator;
-import org.example.exception.CustomException;
+import org.bsuir.task.entity.Group;
+import org.bsuir.task.entity.Student;
+import org.bsuir.task.validator.CustomValidator;
+import org.bsuir.task.exception.CustomException;
 
 import java.util.ArrayList;
 import java.util.List;

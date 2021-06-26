@@ -1,4 +1,4 @@
-package org.example.exception;
+package org.bsuir.task.exception;
 
 public class CustomException extends RuntimeException{
     public CustomException(String message) {

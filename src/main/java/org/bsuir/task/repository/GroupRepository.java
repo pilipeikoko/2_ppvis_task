@@ -1,7 +1,7 @@
-package org.example.repository;
+package org.bsuir.task.repository;
 
-import org.example.entity.Group;
-import org.example.entity.impl.GroupImpl;
+import org.bsuir.task.entity.Group;
+import org.bsuir.task.entity.impl.GroupImpl;
 
 import java.util.ArrayList;
 import java.util.List;
