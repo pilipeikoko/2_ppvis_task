@@ -21,8 +21,6 @@ public class GroupRepository {
         return Holder.instance;
     }
 
-    //fixme
-    //no, i won't use streams, diy
     public List<Group> getGroups() {
         Map<Integer, LinkedList<Group>> copy = Map.copyOf(storage);
         List<Group> result = new ArrayList<>();
