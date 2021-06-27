@@ -11,8 +11,10 @@ import java.util.List;
 
 public class SecretaryImpl implements Secretary {
     @Override
-    public synchronized GroupImpl createGroup(String name) {
-        return new GroupImpl(name);
+    public synchronized Group createGroup(String name) {
+        Group group = new GroupImpl(name);
+        GroupRepository.getInstance().addGroup(group);
+        return group;
     }
 
     @Override
@@ -34,13 +36,11 @@ public class SecretaryImpl implements Secretary {
 
     @Override
     public synchronized List<Student> getStudentsFromCourse(int course) {
-        List<Group> groupList = GroupRepository.getInstance().getGroups();
+        List<Group> groupList = GroupRepository.getInstance().getGroupsByCourse(course);
         List<Student> result = new ArrayList<>();
 
         for (Group group : groupList) {
-            if (group.getCourseNumber() == course) {
-                result.addAll(group.getStudents());
-            }
+            result.addAll(group.getStudents());
         }
         return result;
     }

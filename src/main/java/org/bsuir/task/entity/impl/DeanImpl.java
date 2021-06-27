@@ -22,9 +22,10 @@ public class DeanImpl implements Dean {
     public synchronized void deducateStudent(Student student) {
         List<Group> groups = GroupRepository.getInstance().getGroups();
 
-        for (Group group : groups)
-            //todo?
+        for (Group group : groups){
             group.removeStudent(student);
+            break;
+        }
     }
 
     @Override
